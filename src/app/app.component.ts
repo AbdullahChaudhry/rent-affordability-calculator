@@ -7,27 +7,16 @@ import { RentAffordabilityService } from './core/rent-affordability-calculator.s
   <div class="container">
     <div class="form">
       <h1>Rent Affordability Calculator</h1>
-      <p>How much rent can I afford?</p>
-
+      <h4>How much rent can I afford?</h4>
       <div class="row">
-        <input #textbox type="number" placeholder="Gross annual income" (input)="textValue = formatNumber(fromGrossAnnualIncome(toNumber(textbox.value)))">
-        <div class="row__result">Monthly Rent: {{ textValue }}</div>
+        <input #grossAnnualIncome type="number" placeholder="Gross annual income" (input)="monthlyRentResult = formatNumber(fromGrossAnnualIncome(toNumber(grossAnnualIncome.value)))">
+        <div class="row__result">Monthly Rent: {{ monthlyRentResult }}</div>
       </div>
-
       <br>
-
       <div class="row">
-        <input #textbox2 type="number" placeholder="Gross monthly income" (input)="textValue2 = formatNumber(fromGrossMonthlyIncome(toNumber(textbox2.value)))">
-        <div class="row__result">Monthly Rent: {{ textValue2 }}</div>
-      </div>
-
-      <br>
-
-      <div class="row">
-        <p>How much gross income would I need?</p>
-        <input #textbox3 type="number" placeholder="Monthly rent" (input)="textValue3 = formatNumber(totalGrossIncomeFromMonthlyRent(toNumber(textbox3.value)))">
-        <div class="row__result">Gross annual income: {{ textValue3 }}</div>
-        <div class="row__result">Gross monthly income: {{ formatNumber(unformat(textValue3) / 12 ) }}</div>
+        <h4>How much gross income would I need?</h4>
+        <input #monthlyRent type="number" placeholder="Monthly rent" (input)="grossAnnualIncomeResult = formatNumber(totalGrossIncomeFromMonthlyRent(toNumber(monthlyRent.value)))">
+        <div class="row__result">Gross annual income: {{ grossAnnualIncomeResult }}</div>
       </div>
     </div>
   </div>
@@ -35,19 +24,14 @@ import { RentAffordabilityService } from './core/rent-affordability-calculator.s
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  textValue: string = "£0.00"
-  textValue2: string = "£0.00"
-  textValue3: string = "£0.00"
+  monthlyRentResult: string = "£0.00"
+  grossAnnualIncomeResult: string = "£0.00"
   formatter: any
 
   constructor(private rentAffordabilityService: RentAffordabilityService) {}
 
   fromGrossAnnualIncome(annualIncome: number): number {
     return this.rentAffordabilityService.fromGrossAnnualIncome(annualIncome)
-  }
-
-  fromGrossMonthlyIncome(monthlyIncome: number): number {
-    return this.rentAffordabilityService.fromGrossMonthlyIncome(monthlyIncome)
   }
 
   totalGrossIncomeFromMonthlyRent(monthlyRent: number): number {
@@ -60,10 +44,6 @@ export class AppComponent {
 
   formatNumber(num: number): string {
     return this.formatter.format(num)
-  }
-
-  unformat(num: string): number {
-    return Number(num.replace(/£/g, "").replace(/,/g, ""))
   }
 
   ngOnInit() {
