@@ -22,7 +22,7 @@ npm install
 
 ## Usage
 
-Run `ng serve` and Navigate to `http://localhost:4200/`
+Run `yarn start` or `npm start` and Navigate to `http://localhost:4200/`
 
 ## Contributions
 
