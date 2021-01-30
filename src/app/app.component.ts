@@ -23,15 +23,12 @@ import { RentAffordabilityService } from './core/rent-affordability-calculator.s
 
       <br>
 
-      <p>Or</p>
-
       <div class="row">
         <p>How much gross income would I need?</p>
-        <input #textbox3 type="number" placeholder="Monthly Rent" (input)="textValue3 = formatNumber(totalGrossIncomeFromMonthlyRent(toNumber(textbox3.value)))">
+        <input #textbox3 type="number" placeholder="Monthly rent" (input)="textValue3 = formatNumber(totalGrossIncomeFromMonthlyRent(toNumber(textbox3.value)))">
         <div class="row__result">Gross annual income: {{ textValue3 }}</div>
+        <div>Gross monthly income: {{ formatNumber(unformat(textValue3) / 12 ) }}</div>
       </div>
-
-      <div>Gross monthly income: {{ formatNumber(unformat(textValue3) / 12 ) }}</div>
     </div>
   </div>
   `,
@@ -68,8 +65,6 @@ export class AppComponent {
   unformat(num: string): number {
     return Number(num.replace(/£/g, "").replace(/,/g, ""))
   }
-
-  
 
   ngOnInit() {
     this.formatter = new Intl.NumberFormat('en-US', {
