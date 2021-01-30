@@ -27,7 +27,7 @@ import { RentAffordabilityService } from './core/rent-affordability-calculator.s
         <p>How much gross income would I need?</p>
         <input #textbox3 type="number" placeholder="Monthly rent" (input)="textValue3 = formatNumber(totalGrossIncomeFromMonthlyRent(toNumber(textbox3.value)))">
         <div class="row__result">Gross annual income: {{ textValue3 }}</div>
-        <div>Gross monthly income: {{ formatNumber(unformat(textValue3) / 12 ) }}</div>
+        <div class="row__result">Gross monthly income: {{ formatNumber(unformat(textValue3) / 12 ) }}</div>
       </div>
     </div>
   </div>
